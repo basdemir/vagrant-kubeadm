@@ -29,5 +29,5 @@ curl https://raw.githubusercontent.com/ahmetb/kubectl-aliases/master/.kubectl_al
     sed -i -e "/ZSH_THEME=\"robbyrussell\"/c ZSH_THEME=\"bira\""  -e "//d"  ~/.zshrc
 #    sed  -i $'/  git/c  git helm docker docker-compose docker-machine kubectl kube-ps1 zsh-autosuggestions zsh-syntax-highlighting vagrant vagrant-prompt' ~/.zshrc
     sed -i 's/plugins=.*/plugins=(git helm docker docker-compose docker-machine kubectl kube-ps1 zsh-autosuggestions zsh-syntax-highlighting vagrant vagrant-prompt)/' ~/.zshrc
-    echo source ~/.kubectl_aliases >> ~/.zshrc
+    echo "source ~/.kubectl_aliases" >> ~/.zshrc
 fi

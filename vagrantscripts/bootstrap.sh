@@ -8,10 +8,6 @@ echo "#################"
 
 nodeIp=$1
 
-apt-get update
-apt-get upgrade -y
-apt-get install -y zsh vim git mlocate ldap-utils gnutls-bin ssl-cert tmux
-
 ls /usr/local/share/ca-certificates/PCAcer.crt > /dev/null 2>&1
 CERT_INSTALLED=$?
 
@@ -30,6 +26,7 @@ if [ $DOCKER_INSTALLED -eq 0 ]; then
     echo "Docker Already Installed"
 else
     echo ">>> Installing docker"
+    apt-get update
     sudo apt-get install -y docker.io
     echo ">>> Adding vagrant user to docker group"
     sudo usermod -aG docker vagrant

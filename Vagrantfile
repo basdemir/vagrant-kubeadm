@@ -1,8 +1,8 @@
 VAGRANTFILE_API_VERSION = "2"
 
-$k8s_count=1
-$k8s_memory=6144
-$k8s_cpus=4
+$k8s_count=3
+$k8s_memory=4096
+$k8s_cpus=2
 $startingIp=50
 
 def hostPrefix()
@@ -30,7 +30,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
           v.memory = 4096
           v.cpus = $k8s_cpus
         elsif i == 2                       
-          v.memory = 10240
+          v.memory = 4096
           v.cpus = $k8s_cpus
         else                            
           v.memory = $k8s_memory
@@ -43,24 +43,14 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
       systemctl stop ufw
       systemctl disable ufw
-    #    yum update -y
-    #    yum install mlocate  -y
-    #    yum install docker-ce  -y
-    #    yum install -y kubelet kubeadm kubectl --disableexcludes=kubernetes
-    #    systemctl stop firewalld.service
-    #    systemctl disable firewalld.service
-    #    systemctl start docker
-    #    systemctl enable docker
-    #    usermod -aG docker vagrant
-    #    updatedb
       SHELL
       node.vm.provision :shell, :path => "vagrantscripts/grubupdate.sh"
+      node.vm.provision :shell, :path => "vagrantscripts/bootstrap.sh", :args => "#{workerIP(i)}"
       node.vm.provision :shell, :path => "vagrantscripts/setLocale.sh"
       # Change the vagrant user's shell to use zsh
-      node.vm.provision :shell, inline: "chsh -s /bin/zsh vagrant"
+      node.vm.provision :shell, inline: "chsh -s /usr/bin/zsh vagrant"
       node.vm.provision :shell, :path => "vagrantscripts/shellVimExtras.sh"
       node.vm.provision :shell, :path => "vagrantscripts/shellVimExtras.sh", privileged: false
-      node.vm.provision :shell, :path => "vagrantscripts/bootstrap.sh", :args => "#{workerIP(i)}"
       # You can disable above scripts if you use custom VM image which include necessary installations.
       node.vm.provision :shell, :path => "vagrantscripts/minimal.sh", :args => ["#{workerIP(i)}", "#$startingIp", "#$k8s_count", "#{ipPrefix()}", "#{hostPrefix()}"]
     end
