@@ -1,5 +1,6 @@
 # vagrant-kubeadm
-## !!! First do vagrant reload from host machine
+## First do vagrant up from host machine
+## !!! After a succefull create, do vagrant reload from host machine
 ## !!! After successful reload do vagrant ssh k8s-01 on host machine. Now you're inside the first vm created by vagrant
 
 
@@ -113,7 +114,6 @@ subjects:
 EOF
 
 ```
-
 
 #### Vagrant box oluşturma-- sonrasında hosts ve /etc/default/kubeleti editle
 ```console
