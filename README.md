@@ -1,10 +1,10 @@
 # vagrant-kubeadm
-## First do vagrant up from host machine
-## !!! After a succefull create, do vagrant reload from host machine
-## !!! After successful reload do vagrant ssh k8s-01 on host machine. Now you're inside the first vm created by vagrant
+First do vagrant up from host machine
+!!! After a succefull create, do vagrant reload from host machine
+!!! After successful reload do vagrant ssh k8s-01 on host machine. Now you're inside the first vm created by vagrant
 
 
-## start the master, change --apiserver-advertise-address=X.X.X.X # change X.X.X.X with your IP at eth1
+### start the master, change --apiserver-advertise-address=X.X.X.X # change X.X.X.X with your IP at eth1
 ```console
 kubeadm config images pull #optional
 export ethIp=192.168.104.51
